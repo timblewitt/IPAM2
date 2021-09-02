@@ -1,7 +1,7 @@
 [
   {
     "name": "AIPASClientId",
-    "value": "d4ff5020-6115-4c84-b5a1-1e1b37104b58"
+    "value": "3a1a7536-2fc8-4ee3-8214-86a2a676f0d5"
   },
   {
     "name": "AIPASClientSecret",
@@ -17,10 +17,10 @@
   },
   {
     "name": "AIPASStorageAccountName",
-    "value": "hiw6ffivq3drkstorage"
+    "value": "o7bcylwiwk4l4storage"
   },
   {
     "name": "AIPASResourceGroupName",
-    "value": "rg-ipam-01"
+    "value": "rg-ipam-uksouth-01"
   }
 ]
