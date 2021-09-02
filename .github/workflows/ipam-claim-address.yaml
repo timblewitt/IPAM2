@@ -6,9 +6,22 @@ on:
   push:
     branches: [ none ]
   workflow_dispatch:
+    inputs:
+      cgzoneid:
+        description: 'Customer group landing zone ID'
+        required: true
+        default: 'p001cga'
+      subid:
+        description: 'Azure subscription for deployment of resources'
+        required: true
+        default: 'ef620d24-2d5d-4e63-aaf9-e42cafb44dfb'
+      regionname:
+        description: 'Azure region for deployment of resources'
+        required: true
+        default: 'uksouth'
 
 jobs:
-  register-addresses:
+  claim-address:
     runs-on: ubuntu-latest
     steps:
       - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -24,9 +37,9 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            $cgZoneId = "${{ parameters.CustomerGroupZone }}"
-            $subId = "${{ parameters.Subscription }}"
-            $regionName = "${{ parameters.AzureRegion }}"
+            $cgZoneId = '${{ github.event.inputs.cgzoneid }}'
+            $subId = '${{ github.event.inputs.subid }}'
+            $regionName = '${{ github.event.inputs.regionname }}'
             $rgName = "rg-$cgZoneId-$regionName-network"
             $vnetName = "vnet-$cgZoneId-$regionName-01"
             
