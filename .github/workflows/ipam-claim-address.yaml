@@ -14,7 +14,7 @@ on:
       subid:
         description: 'Azure subscription for deployment of resources'
         required: true
-        default: 'ef620d24-2d5d-4e63-aaf9-e42cafb44dfb'
+        default: 'Azure Landing Zone'
       regionname:
         description: 'Azure region for deployment of resources'
         required: true
