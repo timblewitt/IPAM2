@@ -11,7 +11,7 @@ resource rgNetwork 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: regionName
 }
 
-module vnet './src/elz/modules/network.bicep' = {
+module vnet './modules/network.bicep' = {
   name: 'vnetDeployment'
   scope: rgNetwork
   params: {
