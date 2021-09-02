@@ -1,5 +1,5 @@
 param regionName string
-param storageName string = 'site${uniqueString(resourceGroup().id)}'
+param storageName string = 'sahmrc${uniqueString(resourceGroup().id)}'
 
 var rgIpamName = 'rg-hmrc-${regionName}-ipam'
 
