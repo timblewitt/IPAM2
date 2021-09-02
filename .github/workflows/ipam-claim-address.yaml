@@ -1,0 +1,71 @@
+# This workflow claims an IP address range with the IPAM function for a new VNet 
+
+name: IPAM-Claim-Address
+
+on:
+  push:
+    branches: [ none ]
+  workflow_dispatch:
+
+jobs:
+  register-addresses:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        uses: actions/checkout@v2
+      
+      - name: Log on to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS}}
+          enable-AzPSSession: true
+          
+      - name: Invoke IPAM function to claim an address space
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $cgZoneId = "${{ parameters.CustomerGroupZone }}"
+            $subId = "${{ parameters.Subscription }}"
+            $regionName = "${{ parameters.AzureRegion }}"
+            $rgName = "rg-$cgZoneId-$regionName-network"
+            $vnetName = "vnet-$cgZoneId-$regionName-01"
+            
+            Set-AzContext -Subscription $subId
+            $subName = (Get-AzContext).Subscription.Name
+
+            If ((Get-AzVirtualNetwork -name $vnetName) -eq $null) {
+              Write-Host "VNet $vnetName does not already exist in subscription $subName"
+              $uri = 'https://fa-ipam-uksouth-01.azurewebsites.net/api/RegisterAddressSpace?code=yNbwthrkApUQ/6nensRvXe5SVcTf1FgU3pFUaMXXqCI7E4yfsWAfUQ=='
+              $body = @{
+                'InputObject' = @{
+                  'ResourceGroup' = $rgName
+                  'VirtualNetworkName' = $vnetName
+                }
+              } | ConvertTo-Json
+              $params = @{
+                    'Uri'         = $uri
+                    'Method'      = 'POST'
+                    'ContentType' = 'application/json'
+                    'Body'        = $Body
+              }
+              $Result = Invoke-RestMethod @params
+              $networkAddress = $Result.NetworkAddress
+              
+              Write-Host "Creating VNet $vnetName in resource group $rgName with network address $networkAddress"
+              New-AzDeployment -Name $cgZoneId$regionName -Location $regionName -TemplateFile ./main.bicep `
+                    -cgZoneId $cgZoneId `
+                    -regionName $regionName `
+                    -addressRange $networkAddress
+            }
+            Else {
+              Write-Host "VNet $vnetName already exists in subscription $subName"
+            }
+            Start-Sleep 30
+            Write-Host "Updating storage table"
+            $uri = 'https://fa-ipam-uksouth-01.azurewebsites.net/api/UpdateAddressSpace?code=eVxOudEEqLcCtNxaR9RPeL7vkjZCRr9tV7QDRHhWQgeaTuVoMyxt2w=='
+            $params = @{
+                  'Uri'         = $uri
+                  'Method'      = 'GET'
+            }
+            $Result = Invoke-RestMethod @params
+          azPSVersion: latest 
