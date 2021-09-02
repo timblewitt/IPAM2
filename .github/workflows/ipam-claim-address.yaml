@@ -65,7 +65,7 @@ jobs:
               $networkAddress = $Result.NetworkAddress
               
               Write-Host "Creating VNet $vnetName in resource group $rgName with network address $networkAddress"
-              New-AzDeployment -Name $cgZoneId$regionName -Location $regionName -TemplateFile ./src/elz/main.bicep `
+              New-AzDeployment -Name $cgZoneId$regionName -Location $regionName -TemplateFile ./src/elz/elz.bicep `
                     -cgZoneId $cgZoneId `
                     -regionName $regionName `
                     -addressRange $networkAddress

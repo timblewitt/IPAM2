@@ -1,0 +1,46 @@
+# This workflow creates the supporting resources for the IPAM function 
+
+name: IPAM-Build-Azure-Resources
+
+on:
+  push:
+    branches: [ none ]
+  workflow_dispatch:
+    inputs:
+      subid:
+        description: 'Azure subscription for deployment of resources'
+        required: true
+        default: 'Azure Landing Zone'
+      regionname:
+        description: 'Azure region for deployment of resources'
+        required: true
+        default: 'uksouth'
+
+jobs:
+  claim-address:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        uses: actions/checkout@v2
+      
+      - name: Log on to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS}}
+          enable-AzPSSession: true
+          
+      - name: Create IPAM Azure resources
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $subId = '${{ github.event.inputs.subid }}'
+            $regionName = '${{ github.event.inputs.regionname }}'
+            $rgName = "rg-hmrc-$regionName-ipam"
+            
+            Set-AzContext -Subscription $subId
+            $subName = (Get-AzContext).Subscription.Name
+
+            Write-Host "Creating VNet $vnetName in resource group $rgName with network address $networkAddress"
+            New-AzDeployment -Name $cgZoneId$regionName -Location $regionName -TemplateFile ./build/build.bicep `
+              -regionName $regionName `
+          azPSVersion: latest 
