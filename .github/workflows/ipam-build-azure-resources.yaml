@@ -41,6 +41,6 @@ jobs:
             $subName = (Get-AzContext).Subscription.Name
 
             Write-Host "Creating resource group and storage account for IPAM"
-            New-AzDeployment -Name "HMRCIPAMI$regionName -Location $regionName -TemplateFile ./build/build.bicep `
+            New-AzDeployment -Name "HMRCIPAMI$regionName" -Location $regionName -TemplateFile ./build/build.bicep `
               -regionName $regionName `
           azPSVersion: latest 
