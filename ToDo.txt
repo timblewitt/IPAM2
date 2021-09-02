@@ -1,4 +1,5 @@
 # ToDo
+#   Bicep for RG and storage account with SML tables
 #   T-shirt size networks
 #   Add subnets to VNet
 #   Store function app key in vault
