@@ -1,6 +1,6 @@
 # This workflow deploys a the AIPAS IPAM Azure Function
 
-name: Deploy-Azure-Function
+name: IPAM-Deploy-Azure-Function
 
 env:
   AZURE_FUNCTIONAPP_NAME: "fa-ipam-uksouth-01"    # set this to your application's name
