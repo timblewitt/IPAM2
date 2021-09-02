@@ -1,0 +1,55 @@
+# This workflow registers IP address ranges with the IPAM function
+
+name: IPAM-Register-Addresses
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ none ]
+  # pull_request:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  register-addresses:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # Log on to Azure
+      - name: Log on to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS}}
+          enable-AzPSSession: true
+      # Invoke IPAM function to add address spaces
+      - name: Run Azure PowerShell script
+        uses: azure/powershell@v1
+        with:
+          azPSVersion: 'latest'
+          inlineScript: |
+            $networkAddresses = @("10.187.0.0/24",
+                                  "10.187.1.0/24",
+                                  "10.187.2.0/24",
+                                  "10.187.3.0/24")
+            Write-Host "Adding new address spaces to IPAM"
+            $uri = 'https://fa-ipam-uksouth-01.azurewebsites.net/api/AddAddressSpace?code=YNd3EE73611Hp7OZ0lDFoPInRPrPfFDqXMZ13dL43ZRnl1ThhGIW4g=='
+            foreach ($nw in $networkAddresses) {
+              Write-Host "Adding network $nw"
+              $body = @{
+                "NetworkAddress"=$nw
+              } | ConvertTo-Json
+              $params = @{
+                  'Uri'         = $uri
+                  'Method'      = 'POST'
+                  'ContentType' = 'application/json'
+                  'Body'        = $body
+              }
+              $Result = Invoke-RestMethod @params -ErrorAction SilentlyContinue
+              Write-Host "Result of Invoke-RestMethod for network $nw :" $result
+            }
