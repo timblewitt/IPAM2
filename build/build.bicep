@@ -12,7 +12,7 @@ module storage './modules/storage.bicep' = {
   name: 'storageDeployment'
   scope: rgIpam
   params: {
-    saName: 'sahmrcuksouth${uniqueString('resourceGroup.id')}'
+    saName: 'sahmrc${uniqueString('resourceGroup.id')}'
     saSku: 'Standard_LRS'
     saKind: 'StorageV2'
   }
