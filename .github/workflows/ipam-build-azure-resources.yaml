@@ -41,5 +41,5 @@ jobs:
 
             Write-Host "Creating resource group and storage account for 
             $deploymentName = Get-Date -Format yyyyMMddhhmm
-            New-AzDeployment -Name $deploymentName -Location $regionName -TemplateFile ./build/build.bicep -regionName $regionNameIPAM"
+            New-AzDeployment -Name $deploymentName -Location $regionName -TemplateFile ./build/build.bicep -regionName $regionName"
           azPSVersion: latest 
