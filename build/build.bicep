@@ -1,5 +1,4 @@
 param regionName string
-param storageName string = 'sahmrc${uniqueString(resourceGroup().id)}'
 
 var rgIpamName = 'rg-hmrc-${regionName}-ipam'
 
@@ -13,7 +12,7 @@ module storage './modules/storage.bicep' = {
   name: 'storageDeployment'
   scope: rgIpam
   params: {
-    saName: storageName
+    saName: 'sahmrcuksouth${uniqueString('resourceGroup.id')}'
     saSku: 'Standard_LRS'
     saKind: 'StorageV2'
   }
