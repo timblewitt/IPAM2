@@ -10,3 +10,13 @@ resource sa 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   }
   kind: saKind
 }
+
+resource tableservice 'Microsoft.Storage/storageAccounts/tableServices@2021-04-01' = {
+  name: 'default'
+  parent: sa
+}
+
+resource symbolicname 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
+  name: 'ipammedium'
+  parent: tableservice
+}
