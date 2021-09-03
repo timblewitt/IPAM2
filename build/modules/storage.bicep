@@ -16,17 +16,17 @@ resource tableservice 'Microsoft.Storage/storageAccounts/tableServices@2021-04-0
   parent: sa
 }
 
-resource symbolicname 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
+resource ipamsmall 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
   name: 'ipam-small'
   parent: tableservice
 }
 
-resource symbolicname 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
+resource ipammedium 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
   name: 'ipam-medium'
   parent: tableservice
 }
 
-resource symbolicname 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
+resource ipamlarge 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
   name: 'ipam-large'
   parent: tableservice
 }
