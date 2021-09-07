@@ -17,10 +17,10 @@
   },
   {
     "name": "AIPASStorageAccountName",
-    "value": "o7bcylwiwk4l4storage"
+    "value": "sahmrckyk4iqlcaxrvi"
   },
   {
     "name": "AIPASResourceGroupName",
-    "value": "rg-ipam-uksouth-01"
+    "value": "rg-hmrc-uksouth-ipam"
   }
 ]
