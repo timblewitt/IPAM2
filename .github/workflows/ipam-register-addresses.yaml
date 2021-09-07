@@ -24,10 +24,10 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            $networkAddresses = @("10.188.0.0/24",
-                                  "10.188.1.0/24",
-                                  "10.188.2.0/24",
-                                  "10.188.3.0/24")
+            $networkAddresses = @("10.188.0.0/22",
+                                  "10.188.64.0/22",
+                                  "10.188.128.0/22",
+                                  "10.188.192.0/22")
             Write-Host "Adding new address spaces to IPAM"
             $uri = 'https://fa-ipam-uksouth-01.azurewebsites.net/api/AddAddressSpace?code=YNd3EE73611Hp7OZ0lDFoPInRPrPfFDqXMZ13dL43ZRnl1ThhGIW4g=='
             foreach ($nw in $networkAddresses) {
