@@ -16,6 +16,11 @@ resource tableservice 'Microsoft.Storage/storageAccounts/tableServices@2021-04-0
   parent: sa
 }
 
+resource ipam 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
+  name: 'ipam'
+  parent: tableservice
+}
+
 resource ipamsmall 'Microsoft.Storage/storageAccounts/tableServices/tables@2021-04-01' = {
   name: 'ipamsmall'
   parent: tableservice
