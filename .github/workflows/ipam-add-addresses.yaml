@@ -1,6 +1,6 @@
-# This workflow registers IP address ranges with the IPAM function
+# This workflow adds IP address ranges using the IPAM function
 
-name: IPAM-Register-Addresses
+name: IPAM-Add-Addresses
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  register-addresses:
+  add-addresses:
     runs-on: ubuntu-latest
     steps:
       - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
