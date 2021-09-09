@@ -73,7 +73,7 @@ jobs:
             Else {
               Write-Host "VNet $vnetName already exists in subscription $subName"
             }
-            Start-Sleep 30
+            Start-Sleep 60
             Write-Host "Updating storage table"
             $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/UpdateAddressSpace?code=a8Gq7Dt1crQvmMuajaYrbRqXdqk3s6c0/KYXwkk8o142GxectBzkIA=='
             $params = @{
