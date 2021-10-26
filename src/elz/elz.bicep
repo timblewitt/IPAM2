@@ -1,6 +1,11 @@
 param cgZoneId string
 param regionName string
 param addressRange string
+param snetWeb string
+param snetApp string
+param snetDb string
+param snetCgTool string
+param snetEcsTool string
 
 var rgNetworkName = 'rg-${cgZoneId}-${regionName}-network'
 var vnetName = 'vnet-${cgZoneId}-${regionName}-01'
@@ -17,5 +22,10 @@ module vnet './modules/network.bicep' = {
   params: {
     vnetName: vnetName
     addressRange: addressRange
+    snetWeb: snetWeb
+    snetApp: snetApp
+    snetDb: snetDb
+    snetCgTool: snetCgTool
+    snetEcsTool: snetEcsTool
   }
 }
