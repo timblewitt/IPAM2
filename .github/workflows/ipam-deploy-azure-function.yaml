@@ -46,7 +46,7 @@ jobs:
         with:
           # Specify the script here
           inlineScript: |
-            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} ---plan "ase20211101b" --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
+            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --plan "ase20211101b" --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
       # Publish Azure Function${{needs.build-and-deploy-storageaccount.outputs.ResourceGroupName}}
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
