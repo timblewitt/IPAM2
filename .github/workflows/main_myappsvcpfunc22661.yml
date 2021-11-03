@@ -11,7 +11,6 @@ on:
 
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: "./src/function/" # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '5.0' # set this to the dotnet version to use
 
 jobs:
   build-and-deploy:
@@ -20,23 +19,9 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
 
-      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: 'Resolve Project Dependencies Using Dotnet'
-        shell: pwsh
-        run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          dotnet build --configuration Release --output ./output
-          popd
-
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
         with:
           app-name: 'myappsvcpfunc22661'
-          slot-name: 'Production'
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C5499E2CB96C46678BF7B428065868BA }}
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
