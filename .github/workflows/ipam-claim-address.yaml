@@ -48,7 +48,7 @@ jobs:
 
             If ((Get-AzVirtualNetwork -name $vnetName) -eq $null) {
               Write-Host "VNet $vnetName does not already exist in subscription $subName"
-              $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/RegisterAddressSpace?code=9MLBVS8SzClK6JCGh9IdBtgJCDyudc/xZUEXW0oxNm4WEQ/owmpzmA=='
+              $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/RegisterAddressSpace?code=tC4TFIW3i1PPmaGzYla654Ubd7SsGSJDEvBaCgStyz4oL7wniKwMow=='
               $body = @{
                 'InputObject' = @{
                   'ResourceGroup' = $rgName
@@ -99,7 +99,7 @@ jobs:
             }
             Start-Sleep 30
             Write-Host "Updating storage table"
-            $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/UpdateAddressSpace?code=a8Gq7Dt1crQvmMuajaYrbRqXdqk3s6c0/KYXwkk8o142GxectBzkIA=='
+            $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/UpdateAddressSpace?code=X5Td2L5orrOuqVnATafVDbIbHUS8lvyDaUcbwhXFtgzQaNaW359DIQ=='
             $params = @{
                   'Uri'         = $uri
                   'Method'      = 'GET'
