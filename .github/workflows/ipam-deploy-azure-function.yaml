@@ -3,7 +3,7 @@
 name: IPAM-Deploy-Azure-Function
 
 env:
-  AZURE_FUNCTIONAPP_NAME: "mypremiumplan"    # set this to your application's name
+  AZURE_FUNCTIONAPP_NAME: "fa-hmrc-uksouth-ipam"    # set this to your application's name
   AZURE_FUNCTIONAPP_PACKAGE_PATH: "./src/function/"  # set this to the path to your web app project, defaults to the repository root
   RESOURCEGROUPNAME: "rg-hmrc-uksouth-ipam"    # Set this variable for the Resource Group Name where to deploy the Azure Function. This needs to be the same RG as where the Storage Account was being deployed.
   SUBSCRIPTIONID: "ef620d24-2d5d-4e63-aaf9-e42cafb44dfb"  # Set this variable to deploy the above Resource Group in a certain Subscription
@@ -47,7 +47,7 @@ jobs:
           azcliversion: 2.29.2
           # Specify the script here
           inlineScript: |
-      #      az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --consumption-plan-location ${{ env.REGION }} --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
+            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --consumption-plan-location ${{ env.REGION }} --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
       # Publish Azure Function${{needs.build-and-deploy-storageaccount.outputs.ResourceGroupName}}
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
