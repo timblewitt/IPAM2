@@ -47,7 +47,9 @@ jobs:
           azcliversion: 2.29.2
           # Specify the script here
           inlineScript: |
-            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --consumption-plan-location ${{ env.REGION }} --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
+            az functionapp plan create --name fap-test-01 --resource-group ${{ env.RESOURCEGROUPNAME }} --location ${{ env.REGION }} --sku B1
+            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --plan fap-test-01 --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
+#            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --consumption-plan-location ${{ env.REGION }} --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
       # Publish Azure Function${{needs.build-and-deploy-storageaccount.outputs.ResourceGroupName}}
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
