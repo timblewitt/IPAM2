@@ -47,12 +47,11 @@ jobs:
           azcliversion: 2.29.2
           # Specify the script here
           inlineScript: |
-            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --plan fap-test-01 --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
 #            az network vnet create --resource-group ${{ env.RESOURCEGROUPNAME }} --name vnet-test-01 --address-prefixes 10.0.0.0/16 --subnet-name snet-01 --subnet-prefixes 10.0.0.0/24
 #            az appservice ase create --name asp20211104a --resource-group ${{ env.RESOURCEGROUPNAME }} --vnet-name vnet-test-01 --subnet snet-01 --kind ASEv2 --front-end-sku I1 --os-preference Windows --virtual-ip-type Internal
 #            az appservice plan create --name fap-test-01 --resource-group ${{ env.RESOURCEGROUPNAME }} --location ${{ env.REGION }} --app-service-environment asp20211104a --sku B1
 #            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --plan fap-test-01 --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
-#            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --consumption-plan-location ${{ env.REGION }} --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
+##            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --consumption-plan-location ${{ env.REGION }} --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
       # Publish Azure Function${{needs.build-and-deploy-storageaccount.outputs.ResourceGroupName}}
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
