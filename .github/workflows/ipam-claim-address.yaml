@@ -99,7 +99,7 @@ jobs:
             }
             Start-Sleep 30
             Write-Host "Updating storage table"
-            $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/UpdateAddressSpace?code=y4anNFqx3mIOBNucQCJ5rSX9kc/LK/GDId0kPmvKj3quWpyaBVtZpA==
+            $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/UpdateAddressSpace?code=y4anNFqx3mIOBNucQCJ5rSX9kc/LK/GDId0kPmvKj3quWpyaBVtZpA=='
             $params = @{
                   'Uri'         = $uri
                   'Method'      = 'GET'
