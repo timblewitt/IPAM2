@@ -45,7 +45,7 @@ jobs:
       - name: Azure CLI Action - Create Function App
         uses: Azure/cli@1.0.4
         with:
-          azcliversion: 2.29.2
+#          azcliversion: 2.29.2
           # Specify the script here
           inlineScript: |
             az functionapp plan create --name $AZURE_FUNCTIONAPP_NAME --resource-group ${{ env.RESOURCEGROUPNAME }} --location ${{ env.REGION }} --sku B1
