@@ -1,6 +1,6 @@
 # This workflow adds IP address ranges using the IPAM function
 
-name: IPAM-Add-Addresses
+name: IPAM-Add-Addresses2
 
 on:
   push:
