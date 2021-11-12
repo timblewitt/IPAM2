@@ -23,7 +23,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            Write-Host "Test1"
+            Write-Output "Test1"
           azPSVersion: latest 
 
 
