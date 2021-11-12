@@ -40,7 +40,9 @@ jobs:
                   'ContentType' = 'application/json'
                   'Body'        = $body
               }
-#              $Result = Invoke-RestMethod @params -ErrorAction SilentlyContinue
-              Write-Host "Result of Invoke-RestMethod for network $nw :" $result
             }
           azPSVersion: latest 
+
+
+#              $Result = Invoke-RestMethod @params -ErrorAction SilentlyContinue
+#              Write-Host "Result of Invoke-RestMethod for network $nw :" $result
