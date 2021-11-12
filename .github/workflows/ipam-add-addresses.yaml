@@ -23,7 +23,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            Write-Output "Test1"
+            $testVar = "testValue"
           azPSVersion: latest 
 
 
