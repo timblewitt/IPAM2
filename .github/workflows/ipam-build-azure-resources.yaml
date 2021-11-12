@@ -14,7 +14,7 @@ on:
       regionname:
         description: 'Azure region for deployment of resources'
         required: true
-        default: 'uksouth'
+        default: 'ukwest'
 
 jobs:
   build-ipam-resources:
