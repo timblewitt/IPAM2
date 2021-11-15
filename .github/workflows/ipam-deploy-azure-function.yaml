@@ -42,6 +42,7 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS}}
+          enable-AzPSSession: true
       # Create Function App in Azure
       - name: Create Function App
         uses: azure/powershell@v1
