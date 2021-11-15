@@ -44,8 +44,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS}}
       # Create Function App in Azure
       - name: Azure CLI Action - Create Function App
-        uses: Azure/cli@2.29.2
-#        uses: Azure/cli@1.0.4
+        uses: Azure/cli@v1
         with:
 #          azcliversion: 2.29.2
           # Specify the script here
