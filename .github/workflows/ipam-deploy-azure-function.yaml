@@ -36,6 +36,7 @@ jobs:
         with:
           inlineScript: |
             Connect-AzAccount -Credential ${{ secrets.AZURE_CREDENTIALS}}
+          azPSVersion: latest 
 
       - name: Create Function App
         uses: azure/powershell@v1
