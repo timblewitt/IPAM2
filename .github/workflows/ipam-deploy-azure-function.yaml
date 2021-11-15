@@ -48,8 +48,8 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            New-AzFunctionAppPlan -Name $AZURE_FUNCTIONAPP_NAME -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -Location ${{ env.REGION }} -WorkerType Windows -Sku EP1 
-            New-AzFunctionApp -Name $AZURE_FUNCTIONAPP_NAME -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -Location ${{ env.REGION }} -Runtime PowerShell -StorageAccountName ${{ env.STORAGEACCOUNTNAME }}
+            New-AzFunctionAppPlan -Name ${{ env.AZURE_FUNCTIONAPP_NAME }} -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -Location ${{ env.REGION }} -WorkerType Windows -Sku EP1 
+            New-AzFunctionApp -Name ${{ env.AZURE_FUNCTIONAPP_NAME }} -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -Location ${{ env.REGION }} -Runtime PowerShell -StorageAccountName ${{ env.STORAGEACCOUNTNAME }}
           azPSVersion: latest 
 #            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --plan $AZURE_FUNCTIONAPP_NAME --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
 #            az network vnet create --resource-group ${{ env.RESOURCEGROUPNAME }} --name vnet-test-01 --address-prefixes 10.0.0.0/16 --subnet-name snet-01 --subnet-prefixes 10.0.0.0/24
