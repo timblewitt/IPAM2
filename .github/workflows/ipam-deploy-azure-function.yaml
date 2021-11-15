@@ -20,37 +20,35 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-and-deploy-azurefunction:
-    # The type of runner that the job will run on
     runs-on: self-hosted
 #    runs-on: windows-latest
-#    runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
       # Build Azure Function. Copies PowerShell IPAM Module to Azure Function
       - name: Run PowerShell Bootstrap script
         run: .\bootstrap.ps1
         shell: pwsh
+
       - name: Copy IPAM PowerShell module to Azure Function
         run: Invoke-Build -Task CopyModuleFiles -File './aipas.build.ps1'
         shell: pwsh
-      # Login to Azure
-      - uses: azure/login@v1
+
+      - name: Login to Azure
+      - uses: azure/powershell@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS}}
-          enable-AzPSSession: true
-      # Create Function App in Azure
+          inlineScript: |
+            Connect-AzAccount -Credential ${{ secrets.AZURE_CREDENTIALS}}
+
       - name: Create Function App
         uses: azure/powershell@v1
         with:
           inlineScript: |
             New-AzFunctionAppPlan -Name ${{ env.AZURE_FUNCTIONAPP_NAME }} -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -Location ${{ env.REGION }} -WorkerType Windows -Sku EP1 
             New-AzFunctionApp -Name ${{ env.AZURE_FUNCTIONAPP_NAME }} -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -PlanName ${{ env.AZURE_FUNCTIONAPP_NAME }} -Runtime PowerShell -StorageAccountName ${{ env.STORAGEACCOUNTNAME }}
-#            Start-Sleep 30
           azPSVersion: latest 
 #            az functionapp plan create --name $AZURE_FUNCTIONAPP_NAME --resource-group rg-hmrc-uksouth-ipam --location uksouth --sku EP1
 #            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --plan $AZURE_FUNCTIONAPP_NAME --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
@@ -59,6 +57,7 @@ jobs:
 #            az appservice (or functionapp?) plan create --name $AZURE_FUNCTIONAPP_NAME --resource-group ${{ env.RESOURCEGROUPNAME }} --location ${{ env.REGION }} --app-service-environment asp20211104a --sku B1
 #            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --plan $AZURE_FUNCTIONAPP_NAME --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
 ##            az functionapp create --resource-group ${{ env.RESOURCEGROUPNAME }} --consumption-plan-location ${{ env.REGION }} --runtime powershell --functions-version 3 --name $AZURE_FUNCTIONAPP_NAME --storage-account ${{ env.STORAGEACCOUNTNAME }}
+
       # Publish Azure Function${{needs.build-and-deploy-storageaccount.outputs.ResourceGroupName}}
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
@@ -66,6 +65,7 @@ jobs:
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+
       # Configure App Settings
       - name: 'Configure App Settings'
         uses: azure/appservice-settings@v1
