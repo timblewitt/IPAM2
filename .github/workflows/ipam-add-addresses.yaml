@@ -9,7 +9,8 @@ on:
 
 jobs:
   add-addresses:
-    runs-on: self-hosted
+    runs-on: windows-latest
+#    runs-on: self-hosted
     steps:
       - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         uses: actions/checkout@v2
@@ -28,7 +29,7 @@ jobs:
                                   "10.188.128.0/22",
                                   "10.188.192.0/22")
             Write-Output "Adding new address spaces to IPAM"
-            $uri = 'https://fa-hmrc-uksouth-ipam2.azurewebsites.net/api/AddAddressSpace?code=7Pqezt//j3iD4sWWsQDATazwi7eZxbjb4ZHvHe8i0UDQe4u6CgEWjA=='
+            $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/AddAddressSpace?code=H19oaGCGDA3MMuURYPPU07k4wr6lSAtvJMjI9IXaDl8LHNTqDImQmg=='
             foreach ($nw in $networkAddresses) {
               Write-Output "Adding network $nw"
               $body = @{
