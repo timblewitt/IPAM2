@@ -49,7 +49,7 @@ jobs:
         with:
           inlineScript: |
             New-AzFunctionAppPlan -Name ${{ env.AZURE_FUNCTIONAPP_NAME }} -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -Location ${{ env.REGION }} -WorkerType Windows -Sku EP1 
-            New-AzFunctionApp -Name ${{ env.AZURE_FUNCTIONAPP_NAME }} -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -Location ${{ env.REGION }} -PlanName ${{ env.AZURE_FUNCTIONAPP_NAME }}  -Runtime PowerShell -StorageAccountName ${{ env.STORAGEACCOUNTNAME }}
+            New-AzFunctionApp -Name ${{ env.AZURE_FUNCTIONAPP_NAME }} -ResourceGroupName ${{ env.RESOURCEGROUPNAME }} -PlanName ${{ env.AZURE_FUNCTIONAPP_NAME }} -Runtime PowerShell -StorageAccountName ${{ env.STORAGEACCOUNTNAME }}
 #            Start-Sleep 30
           azPSVersion: latest 
 #            az functionapp plan create --name $AZURE_FUNCTIONAPP_NAME --resource-group rg-hmrc-uksouth-ipam --location uksouth --sku EP1
