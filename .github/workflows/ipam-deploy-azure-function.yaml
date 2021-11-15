@@ -30,13 +30,12 @@ jobs:
         run: Invoke-Build -Task CopyModuleFiles -File './aipas.build.ps1'
         shell: pwsh
 
-      - name: Login to Azure
-        uses: azure/powershell@v1
+      - name: Log on to Azure
+        uses: azure/login@v1
         with:
-          inlineScript: |
-            Connect-AzAccount -Credential ${{ secrets.AZURE_CREDENTIALS}}
-          azPSVersion: latest 
-
+          creds: ${{ secrets.AZURE_CREDENTIALS}}
+          enable-AzPSSession: true
+          
       - name: Create Function App
         uses: azure/powershell@v1
         with:
