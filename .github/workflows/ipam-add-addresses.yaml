@@ -29,7 +29,7 @@ jobs:
                                   "10.188.128.0/22",
                                   "10.188.192.0/22")
             Write-Output "Adding new address spaces to IPAM"
-            $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/AddAddressSpace?code=iE2WDejqerMmOJvje/LGfn920HNQ28diICDY2yeSyDea2X8Yr1ZriA=='
+            $uri = 'https://fa-hmrc-uksouth-ipam.azurewebsites.net/api/AddAddressSpace?code=aYEoRIM06o4fi8UarbaIEdFkFiGBe5sfq8Xa6JU8Gq3tyYWSWbcqjw=='
             foreach ($nw in $networkAddresses) {
               Write-Output "Adding network $nw"
               $body = @{
