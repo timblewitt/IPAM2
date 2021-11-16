@@ -9,8 +9,8 @@ on:
 
 jobs:
   add-addresses:
-#    runs-on: windows-latest
-    runs-on: self-hosted
+    runs-on: windows-latest
+#    runs-on: self-hosted
     steps:
       - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         uses: actions/checkout@v2
@@ -41,9 +41,7 @@ jobs:
                   'ContentType' = 'application/json'
                   'Body'        = $body
               }
-              $Result = Invoke-RestMethod @params 
+              $Result = Invoke-RestMethod @params -ErrorAction SilentlyContinue
               Write-Output "Result of Invoke-RestMethod for network $nw :" $result
             }
           azPSVersion: latest 
-
-#-ErrorAction SilentlyContinue
