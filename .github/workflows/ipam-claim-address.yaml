@@ -22,8 +22,7 @@ on:
 
 jobs:
   claim-address:
-    runs-on: windows-latest
-#    runs-on: self-hosted
+    runs-on: self-hosted
     steps:
       - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         uses: actions/checkout@v2
