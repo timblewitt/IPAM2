@@ -6,7 +6,7 @@ env:
   AZURE_FUNCTIONAPP_NAME: "fa-hmrc-uksouth-ipam"    
   AZURE_FUNCTIONAPP_PACKAGE_PATH: "./src/function/"  
   RESOURCEGROUPNAME: "rg-hmrc-uksouth-ipam"    
-  SUBSCRIPTIONID: "2f8f5031-b1dd-4415-98c9-e00a7ddbb627"  
+  SUBSCRIPTIONID: "cfcf982f-4a8c-4faa-b7e5-c693ce56b501"  
   STORAGEACCOUNTNAME: "sahmrckyk4iqlcaxrvi"
   REGION: "uksouth" 
 
